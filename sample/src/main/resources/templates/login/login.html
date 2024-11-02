@@ -25,7 +25,7 @@
                     <label for="password" class="sr-only" th:text="#{password}"></label>
                     <input type="text" class="form-control" name="password" />
                 </div>
-                <input type="submit" value="ログイン" class="btn btn-primary" />  
+                <input type="submit" th:value="#{login.btn}" class="btn btn-primary" />  
             </form>
             <a th:href="@{/user/signup}" th:text="#{link.signup}"></a>
         </div>
