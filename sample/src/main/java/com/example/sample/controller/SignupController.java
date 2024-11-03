@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -32,7 +33,12 @@ public class SignupController {
     }
     
     @PostMapping("/signup")
-    public String postSignup(@ModelAttribute SignupForm form) {
+    public String postSignup(Model model, Locale locale, @ModelAttribute SignupForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return getSignup(model, locale, form);
+        } else {
+            //NOP
+        }
         log.info(form.toString());
         return "redirect:/login";
     }   
