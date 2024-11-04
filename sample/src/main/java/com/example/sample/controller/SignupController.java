@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.sample.application.service.UserApplicationService;
+import com.example.sample.domain.user.service.UserService;
 import com.example.sample.form.GroupOrder;
 import com.example.sample.form.SignupForm;
+import com.example.sample.domain.user.model.MUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +21,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import org.modelmapper.ModelMapper;
+
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -26,6 +30,12 @@ public class SignupController {
 
     @Autowired
     private UserApplicationService userApplicationService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping("/signup")
     public String getSignup(Model model, Locale locale, @ModelAttribute SignupForm form) {
@@ -42,6 +52,11 @@ public class SignupController {
             //NOP
         }
         log.info(form.toString());
+
+        MUser user = modelMapper.map(form, MUser.class);
+
+        userService.signup(user);
+        
         return "redirect:/login";
     }   
 }
