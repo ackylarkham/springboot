@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.sample.application.service.UserApplicationService;
+import com.example.sample.form.GroupOrder;
 import com.example.sample.form.SignupForm;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class SignupController {
     }
     
     @PostMapping("/signup")
-    public String postSignup(Model model, Locale locale, @ModelAttribute @Validated SignupForm form, BindingResult bindingResult) {
+    public String postSignup(Model model, Locale locale, @ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return getSignup(model, locale, form);
         } else {
