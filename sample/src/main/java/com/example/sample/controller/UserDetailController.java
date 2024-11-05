@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 
 import com.example.sample.form.UserDetailForm;
+
 import com.example.sample.domain.user.service.UserService;
 import com.example.sample.domain.user.model.MUser;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class UserDetailController {
         form = modelMapper.map(user,UserDetailForm.class);
 
         model.addAttribute("userDetailForm", form);
-
+        
         return "user/detail";
     }
 
