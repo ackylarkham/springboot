@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import com.example.sample.form.UserDetailForm;
 import com.example.sample.domain.user.service.UserService;
 import com.example.sample.domain.user.model.MUser;
-
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/user")
@@ -34,5 +34,19 @@ public class UserDetailController {
 
         return "user/detail";
     }
+
+    @PostMapping(value = "/detail",params = "update")
+    public String updateUser(UserDetailForm form, Model model) {
+        userService.updateUserOne(form.getUserId(),
+                    form.getPassword(),
+                    form.getUserName());
+
+        return "redirect:/user/list";
+    }
     
+    @PostMapping(value = "/detail",params = "delete")
+    public String deleteUser(UserDetailForm form, Model model) {
+        userService.deleteUserOne(form.getUserId());
+        return "redirect:/user/list";
+    }
 }
