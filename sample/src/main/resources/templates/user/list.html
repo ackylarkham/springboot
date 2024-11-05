@@ -21,6 +21,7 @@
                         <th class="th-width">ユーザー名</th>
                         <th class="th-width">生年月日</th>
                         <th class="th-width">性別</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,11 @@
                         <td th:text="${item.userName}"></td>
                         <td th:text="${#dates.format(item.dateOfBirth, 'YYYY/MM/dd')}"></td>
                         <td th:text="${item.gender == 1}?'男性': '女性'"></td>
+                        <td>
+                            <a class="btn btn-primary" th:href="@{'/user/detail/' + ${item.userId}}">
+                                詳細
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

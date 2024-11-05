@@ -3,6 +3,17 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- Mapperとxmlのマッピング-->
 <mapper namespace="com.example.sample.repository.UserMapper">
+    <!-- マッピング定義(ユーザー) -->
+    <resultMap type="com.example.sample.domain.user.model.MUser" id="user">
+        <id column="user_id" property="userId" />
+        <result column="password" property="password" />
+        <result column="user_name" property="userName" />
+        <result column="date_of_birth" property="dateOfBirth" />
+        <result column="gender" property="gender" />
+        <result column="department_id" property="departmentId" />
+        <result column="role" property="role" />
+    </resultMap>
+
     <!-- ユーザー1件登録 -->
     <insert id="insertOne">
         insert into m_user(
@@ -28,5 +39,11 @@
     <select id="findMany" resultType="MUser">
         select *
             from m_user
+    </select>
+
+    <select id="findOne" resultMap="user">
+        select *
+            from m_user
+            where user_id = #{userId}
     </select>
 </mapper>
