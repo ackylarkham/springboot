@@ -10,12 +10,15 @@ import org.springframework.ui.Model;
 
 import com.example.sample.form.UserDetailForm;
 
+import lombok.extern.slf4j.Slf4j;
+
 import com.example.sample.domain.user.service.UserService;
 import com.example.sample.domain.user.model.MUser;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequestMapping("/user")
+@Slf4j
 public class UserDetailController {
 
     @Autowired
@@ -39,9 +42,13 @@ public class UserDetailController {
 
     @PostMapping(value = "/detail",params = "update")
     public String updateUser(UserDetailForm form, Model model) {
-        userService.updateUserOne(form.getUserId(),
-                    form.getPassword(),
-                    form.getUserName());
+        try {
+            userService.updateUserOne(form.getUserId(),
+            form.getPassword(),
+            form.getUserName());
+        } catch (Exception e) {
+            log.error("ユーザー更新に失敗した",e);
+        }
 
         return "redirect:/user/list";
     }
