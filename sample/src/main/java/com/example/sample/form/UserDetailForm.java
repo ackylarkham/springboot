@@ -1,8 +1,10 @@
 package com.example.sample.form;
 
 import java.util.Date;
+import java.util.List;
 
 import com.example.sample.domain.user.model.Department;
+import com.example.sample.domain.user.model.Salary;
 
 import lombok.Data;
 
@@ -15,4 +17,5 @@ public class UserDetailForm {
     private Date dateOfBirth;
     private Integer gender;
     private Department department;
+    private List<Salary> salaryList;
 }
